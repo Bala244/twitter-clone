@@ -1,0 +1,21 @@
+<div>
+<h1 class="center mt"><%= @userinfo.email %></h1>
+<h2 class="center small">You have tweeted <%= @usercount.size %> time(s).</h2>
+</div>
+ 
+<div>
+<% @tweets.reverse.each do |tweet| %>
+  <% if @userinfo == tweet.user %>
+
+    <div class="tweet-container _center">
+        <div class="text-container"><strong class="name"><%= tweet.body %></strong>
+            <div class="nickname"><%= link_to tweet.user.email, user_profile_path(tweet.user) %></div>
+            <div class="nickname"><%= tweet.created_at %></div>
+            <% if current_user == tweet.user %>
+                <%= link_to "Delete", tweet_path(tweet.id), :confirm => "Are you Sure?", :method => :delete, :class => 'btn_danger' %></td>
+            <% end %>
+        </div>
+    </div>
+  <% end %>
+<% end %>
+</div>

@@ -10,12 +10,16 @@
       </ul>
     </div>
   <% end %>
-  <p>
-    <%= form.lable :body %>
-    <br>
-    <%= form.text_field :body, :id => 'body' %>
-  </p>
-
+  
+  <div class="tweet-container _center">
+    <div class="text-container">
+          
+      <%= form.label :body %>
+      <br>
+      <%= form.text_area :body, :id => 'body' %>
+    </div>
+  </div>
+<div class="flex center">
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -1,25 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tweets</h1>
+<h1 class="heading">Tweets</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @tweets.reverse.each do |tweet| %>
 
-  <tbody>
-    <% @tweets.each do |tweet| %>
-      <tr>
-        <h1><td><%= tweet.user.email %></td></h1>
-        <h2><td><%= tweet.body %></td></h2>
-        <h3><td><%= tweet.created_at %></td></h3>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="tweet-container _center">
+    <div class="text-container"><strong class="name"><%= tweet.body %></strong>
+        <div class="nickname"><%= link_to tweet.user.email, user_profile_path(tweet.user) %></div>
+        <div class="nickname"><%= tweet.created_at %></div>
+        <% if current_user == tweet.user %>
+          <%= link_to "Delete", tweet_path(tweet.id), :confirm => "Are you Sure?", :method => :delete, :class => 'btn_danger' %></td>
+        <% end %>
+      </div>
+</div>
+
+<% end %>
 
 <br>
-
-<%= link_to 'New Tweet', new_tweet_path %>

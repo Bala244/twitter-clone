@@ -19,6 +19,12 @@ class TweetsController < ApplicationController
         end
     end
 
+    def destroy
+        @tweet = Tweet.find(params[:id])
+        @tweet.destroy
+        redirect_to '/', :notice =>"Your Tweet Has been Deleted"
+    end
+    
     private 
     def tweet_params
         params.require(:tweet).permit(:body)
