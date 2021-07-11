@@ -25,6 +25,18 @@ class TweetsController < ApplicationController
         redirect_to '/', :notice =>"Your Tweet Has been Deleted"
     end
     
+    def like
+        @tweet = Tweet.find(params[:id])
+        @tweet.liked_by current_user
+        redirect_to '/'
+    end
+      
+    def dislike
+        @tweet = Tweet.find(params[:id])
+        @tweet.disliked_by current_user
+        redirect_to '/'
+    end
+
     private 
     def tweet_params
         params.require(:tweet).permit(:body)

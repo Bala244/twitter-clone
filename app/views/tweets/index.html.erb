@@ -1,16 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <h1 class="heading">Tweets</h1>
-
 <% @tweets.reverse.each do |tweet| %>
 
 <div class="tweet-container _center">
     <div class="text-container"><strong class="name"><%= tweet.body %></strong>
-        <div class="nickname"><%= link_to tweet.user.email, user_profile_path(tweet.user) %></div>
+        <div class="nickname"><%= link_to tweet.user.username, user_profile_path(tweet.user) %></div>
         <div class="nickname"><%= tweet.created_at %></div>
-        <% if current_user == tweet.user %>
-          <%= link_to "Delete", tweet_path(tweet.id), :confirm => "Are you Sure?", :method => :delete, :class => 'btn_danger' %></td>
-        <% end %>
+        
+        <div class="flex">
+        
+          <% if current_user.liked? tweet %>
+          <%= link_to dislike_tweet_path(tweet.id), method: :put do %>
+            <%= image_tag("like.png", :alt => "Like", height: 18, width: 20) %>
+            <%= tweet.get_likes.size %>
+            <% end %>
+            <% else %>
+            <%= link_to like_tweet_path(tweet), method: :put do %>
+                <%= image_tag("dislike.png", :alt => "Like", height: 18, width: 20) %>
+                <%= tweet.get_likes.size %>
+              <% end %>
+          <% end %>
+          
+          <% if current_user == tweet.user %>
+            <%= link_to "Delete", tweet_path(tweet.id), :confirm => "Are you Sure?", :method => :delete, :class => 'btn_danger' %></td>
+          <% end %>
+        </div>
       </div>
 </div>
 

@@ -15,7 +15,7 @@
       <div>
         <span>Rails Twitter Clone</span>
         <% if user_signed_in?  %>
-          Logged In as <strong><%= current_user.email%></strong>
+          Logged In as <strong><%= current_user.username%></strong>
       </div>
       <div>
           <%= link_to 'New Tweet', new_tweet_path, :class => 'btn' %> |
